@@ -119,6 +119,17 @@ let student = {
 		let subject = this.subjects.find(subject => subject.course === course);
 		let progress = hour/subject.duration;
 		return progress;
+	}, 
+	addNewCourse(teacherName, course, duration) {
+		let addNewCourse = {
+			course: course,
+			teacherName: teacherName,
+			passCourse: null,
+			duration: duration,
+			marks: []
+		}
+		student.subjects.push(addNewCourse);
+		return student.subjects;
 	}
 }
 
@@ -133,3 +144,5 @@ console.log(student.addMark("html", 5));
 
 let progress = student.addProgress("css", 24);
 console.log("прогресс прохождения курса: " + progress);
+
+console.log(student.addNewCourse("Yuriy", "PHP", 10));
