@@ -39,7 +39,6 @@ function transformObj(someObj) {
 		propNames,
 		propTypes 
 	}
-
 	var numElem = propNames.filter(function(elem) {
 		return typeof(this[elem]) == "number"; 
 	}, someObj);
@@ -58,7 +57,6 @@ function transformObj(someObj) {
 	console.log(newObj);
 	console.log(someObj);
 }
-
 transformObj(obj);
 
 /* Задание 2: Создать объект, который будет описывать человека. А именно, студента LevelUp. 
@@ -75,21 +73,21 @@ let student = {
 	subjects : [{
 			course: "html",
 			teacherName: "Yuriy",
-			passCourse: 1,
+			completed: 1,
 			duration: 24,
 			marks: [4, 5, 4, 5, 4]
 		},
 		{
 			course: "css",
 			teacherName: "Yuriy",
-			passCourse: 1,
+			completed: 1,
 			duration: 30,
 			marks: [4, 5, 5, 5, 4]
 		},
 		{
 			course: "javascript",
 			teacherName: "Yuriy",
-			passCourse: 0.12,
+			completed: 0.12,
 			duration: 128,
 			marks: [5, 4, 3, 4]
 		}		
@@ -100,14 +98,45 @@ let student = {
 	getAge () {
 		return `${this.age} years old`;
 	},
+	getCourses(){
+		const allCourses = this.subjects.reduce(function(prev, curr) {
+			if (prev)
+				return `${prev}, ${curr.course}`;
+			else 
+				return `${curr.course}`;
+		}, "");
+		return allCourses;
+	},
+	addNewCourse(teacherName, course, duration) {
+		let addNewCourse = {
+			course: course,
+			teacherName: teacherName,
+			completed: 0,
+			duration: duration,
+			marks: []
+		}
+		student.subjects.push(addNewCourse);
+		return student.subjects;
+	},
 	getAvarageMarkByCourse(course){
-		let subject = this.subjects.find(subject => subject.course === course);
+		const subject = this.subjects.find(subject => subject.course === course);
 
-		let arrMarks = subject.marks;
-		let totalSum = arrMarks.reduce(function(a, b){
+		const arrMarks = subject.marks;
+		const totalSum = arrMarks.reduce(function(a, b){
 			return a + b;
 		}, 0);
-		let avarage = totalSum/arrMarks.length;
+		const avarage = totalSum/arrMarks.length;
+		return avarage;
+	},
+	getAvarageMark(){
+		const allMarks = this.subjects.reduce(function(prev, curr) {
+			return prev.concat(curr.marks);
+		}, []);
+		
+		const totalSum = allMarks.reduce(function(a, b){
+				return a + b;
+		}, 0);
+		const avarage = totalSum/allMarks.length;
 		return avarage;
 	},
 	addMark(course, mark){
@@ -117,20 +146,26 @@ let student = {
 	},
 	addProgress(course, hour){
 		let subject = this.subjects.find(subject => subject.course === course);
-		let progress = hour/subject.duration;
-		return progress;
-	}, 
-	addNewCourse(teacherName, course, duration) {
-		let addNewCourse = {
-			course: course,
-			teacherName: teacherName,
-			passCourse: null,
-			duration: duration,
-			marks: []
+		
+		if (subject.completed === 1) return subject.completed;
+		else {
+			subject.completed += hour/subject.duration;
+			return subject.completed;
 		}
-		student.subjects.push(addNewCourse);
-		return student.subjects;
-	}
+	}, 
+	getProgress() {
+		let subjectHtml = this.subjects.find(subject => subject.course === "html");
+		const completedHtml = subjectHtml.completed * 100;
+		console.log ("Курс html пройден на " + completedHtml + "%");
+
+		let subjectCss = this.subjects.find(subject => subject.course === "css");
+		const completedCss = subjectCss.completed * 100;
+		console.log ("Курс html пройден на " + completedCss + "%");
+
+		let subjectJS = this.subjects.find(subject => subject.course === "javascript");
+		const completedJS = subjectJS.completed * 100;
+		console.log ("Курс html пройден на " + completedJS + "%");
+	}	
 }
 
 console.log(student.getFullName());
@@ -141,8 +176,15 @@ console.log(student.getAvarageMarkByCourse("css"));
 console.log(student.getAvarageMarkByCourse("javascript"));
 
 console.log(student.addMark("html", 5));
-
-let progress = student.addProgress("css", 24);
-console.log("прогресс прохождения курса: " + progress);
-
 console.log(student.addNewCourse("Yuriy", "PHP", 10));
+
+console.log(student.getCourses());
+console.log("среднее арифметическое из всех оценок во всех курсах: " + student.getAvarageMark());
+
+let progressCss = student.addProgress("css", 24);
+console.log("прогресс прохождения курса CSS: " + progressCss);
+
+let progressJS = student.addProgress("javascript", 30);
+console.log("прогресс прохождения курса JS: " + progressJS);
+student.getProgress();
+
