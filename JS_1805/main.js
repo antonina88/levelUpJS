@@ -7,7 +7,7 @@ function Bar(title) {
 	this.listOrders = [];
 };
 
-function Person (name, age, position) {
+function Person (name, age) {
 	this.name = name;
 	this.age = age;
 }
@@ -135,7 +135,6 @@ sophia.takeOrder("brandy", 1, campusBar);
 
 sam.executeOrder("apple fresh", 5, campusBar);
 emma.executeOrder("tequila", 1, campusBar);
-sophia.executeOrder("rum", 1, campusBar);
 sophia.executeOrder("brandy", 3, campusBar);
 
 sam.addTips(200, campusBar);
