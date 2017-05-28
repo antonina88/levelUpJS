@@ -7,7 +7,7 @@ function Bar(title) {
 	this.listOrders = [];
 };
 
-function Person (name, age, position) {
+function Person (name, age) {
 	this.name = name;
 	this.age = age;
 }
