@@ -160,11 +160,11 @@ let student = {
 
 		let subjectCss = this.subjects.find(subject => subject.course === "css");
 		const completedCss = subjectCss.completed * 100;
-		console.log ("Курс html пройден на " + completedCss + "%");
+		console.log ("Курс css пройден на " + completedCss + "%");
 
 		let subjectJS = this.subjects.find(subject => subject.course === "javascript");
 		const completedJS = subjectJS.completed * 100;
-		console.log ("Курс html пройден на " + completedJS + "%");
+		console.log ("Курс javascript пройден на " + completedJS + "%");
 	}	
 }
 
