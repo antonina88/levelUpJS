@@ -63,7 +63,7 @@ class Barmen extends Person {
 		this.crowningCocktail = coctail;
 		return this;
 	}
-}
+} 
 class Waiter extends Person {
 	constructor(name, age) {
 		super(name, age);
