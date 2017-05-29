@@ -145,5 +145,3 @@ const eachTips = campusBar.shareTips();
 console.log(`Количество чаевых для каждого сотрудника бара составляет: ${eachTips}`);
 
 console.log(campusBar); 
-
-
