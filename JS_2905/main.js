@@ -1,10 +1,10 @@
 try {
 	let indexUrl = prompt("Введите пожалуйста номер персонажа");
-	let re = /[1-8][0-9]?/g;
+	let reg = /[1-8][0-9]?/g;
 
 	if (indexUrl === null) {
 		throw new Error("Вы отменили действие!");
-	} else if (!indexUrl.match(re)) {
+	} else if (!indexUrl.match(reg)) {
 		throw new Error("Вы ввели некорректное значение, попробуйте снова");
 	}
 
