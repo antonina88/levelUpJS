@@ -12,7 +12,6 @@ let fullDate = date2+" " + time;
 let objDate = new Date(fullDate);
 console.log(objDate.getTime());
 
-
 //Задание 2
 let str2 = "apple:2016/5/27__bid_203.38-ask_203.43|2016/5/28__bid_203.35-ask_203.42|2016/5/28__bid_203.39-ask_203.45";
 
