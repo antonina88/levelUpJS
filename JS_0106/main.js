@@ -34,9 +34,9 @@ Brand.prototype.addRate = function(data, bid, ask) {
 	let newRate = {};
 	for (let i = 0; i < ask.length; i++) {
 		newRate = {
-				data: data[i],
-				bid: bid[i],
-				ask: ask[i]
+			data: data[i],
+			bid: bid[i],
+			ask: ask[i]
 		} 
 		this.rates.push(newRate);	
 	}
