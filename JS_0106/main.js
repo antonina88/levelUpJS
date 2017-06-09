@@ -41,6 +41,8 @@ Brand.prototype.addRate = function(data, bid, ask) {
 		this.rates.push(newRate);	
 	}
 }
-let firstBrand = new Brand(brandName);
+let firstBrand = new Brand(brandName[0]);
 firstBrand.addRate(dateArr,bid,ask);
 console.log(firstBrand);
+
+console.log(dateArr);
