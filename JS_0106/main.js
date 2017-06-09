@@ -43,8 +43,4 @@ Brand.prototype.addRate = function(data, bid, ask) {
 let firstBrand = new Brand(brandName[0]);
 firstBrand.addRate(dateArr,bid,ask);
 console.log(firstBrand);
-<<<<<<< HEAD
-
 console.log(dateArr);
-=======
->>>>>>> a14e07cabd129e2e2d6eb603b563939e3644e75f
