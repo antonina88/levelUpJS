@@ -18,21 +18,17 @@ let obj = {
 	arr: ["some", "array", {someProp: "value"}],
 	prop: { key: 1 },
 	empty: null,
-	last: 0
+	last: 0.33333333
 };
 
 function transformObj(someObj) {
 	let propNames = Object.keys(someObj);
-	let i = 0;	
-	propNames.forEach(function(el){
-		if (this.hasOwnProperty(el)) {
-			i++;
-		}
-	}, someObj);
+	const i = Object.getOwnPropertyNames(someObj).length;
+
 	let propValues = propNames.map(function(element){
 		return this[element];
 	}, someObj);
-	let propTypes = propValues.map(elem => typeof(elem));
+	let propTypes = propValues.map(elem => typeof elem);
 
 	let newObj = {
 		"Количество собственных свойств" : i,
@@ -47,7 +43,7 @@ function transformObj(someObj) {
 	}, someObj);
 
 	numElem.forEach(function(elem) {
-		this[elem] = this[elem].toFixed(2);
+		this[elem] = parseFloat(this[elem].toFixed(2));
 	}, someObj);
 
 	strElem.forEach(function(elem) {
