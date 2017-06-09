@@ -12,7 +12,6 @@ let fullDate = date2+" " + time;
 let objDate = new Date(fullDate);
 console.log(objDate.getTime());
 
-
 //Задание 2
 let str2 = "apple:2016/5/27__bid_203.38-ask_203.43|2016/5/28__bid_203.35-ask_203.42|2016/5/28__bid_203.39-ask_203.45";
 
@@ -34,9 +33,9 @@ Brand.prototype.addRate = function(data, bid, ask) {
 	let newRate = {};
 	for (let i = 0; i < ask.length; i++) {
 		newRate = {
-				data: data[i],
-				bid: bid[i],
-				ask: ask[i]
+			data: data[i],
+			bid: bid[i],
+			ask: ask[i]
 		} 
 		this.rates.push(newRate);	
 	}
@@ -44,5 +43,8 @@ Brand.prototype.addRate = function(data, bid, ask) {
 let firstBrand = new Brand(brandName[0]);
 firstBrand.addRate(dateArr,bid,ask);
 console.log(firstBrand);
+<<<<<<< HEAD
 
 console.log(dateArr);
+=======
+>>>>>>> a14e07cabd129e2e2d6eb603b563939e3644e75f
