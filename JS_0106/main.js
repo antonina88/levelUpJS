@@ -24,6 +24,7 @@ function Brand(brandName) {
 } 
 Brand.prototype.addRate = function(reg, str) {
 	let newRate = {};
+	let data;
 	while ((data = re.exec(str)) !== null)  {
 		newRate = {
 			data: data[1],
