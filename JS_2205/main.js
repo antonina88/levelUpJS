@@ -30,4 +30,4 @@ Date.prototype.getCustomFormat = function(str){
 	return fullDate;
 }
 let currDate = new Date();
-console.log(currDate.getCustomFormat("YY-MMMM-DD HH:mm:ss"));
+console.log(currDate.getCustomFormat("YY-MMMM-DD HH:mm:ss")); 
