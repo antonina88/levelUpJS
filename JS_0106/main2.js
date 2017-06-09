@@ -21,6 +21,3 @@ let firstBrand = new Brand(strArr[0]);
 firstBrand.addRate(re, strArr[1]);
 
 console.log(firstBrand);
-
-
-
