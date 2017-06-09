@@ -1,34 +1,33 @@
 Date.prototype.getCustomFormat = function(str){
-	let arrStr = str.split(" ");
 	let month = ["january", "february", "march", "april", "may", "june", "july", "august","september","october","november"];
-	let date, time;
+	let that = this;
+	const configDate = {
+		YY: () => that.getFullYear().toString().slice(2),
+		MM: () => month[that.getMonth()],
+		DD: () => that.getDate()
+	}
+	const configTime = {
+		HH: () => that.getHours(),
+		mm: () => that.getMinutes(),
+		ss: () => that.getSeconds()
+	}
+	const patternsDate = Object.keys(configDate);
+	const patternsTime = Object.keys(configTime);	
 
-	let splitElem = arrStr.map((strElem) => {
-		return strElem.includes("-") ? date = strElem.split("-") : time = strElem.split(":");
-	});
-
-	let resDate = date.map(dateElem => {
-		switch(dateElem) {
-			case "YY": return this.getFullYear().toString().slice(2); break;
-			case "YYYY": return this.getFullYear().toString().slice(2); break;
-			case "MM": return month[this.getMonth()]; break;
-			case "MMMM": return month[this.getMonth()]; break;
-			case "DD": return this.getDate(); break;
+	let newDate = patternsDate.map(function(pattern) {
+		if (str.includes(pattern)) {
+			return configDate[pattern]();
 		}
 	}).join("-");
 
-	let resTime = time.map(timeElem => {
-		switch(timeElem) {
-			case "HH": return this.getHours(); break;
-			case "mm": return this.getMinutes(); break;
-			case "ss": return this.getSeconds(); break;
+	let newTime = patternsTime.map(function(pattern) {
+		if (str.includes(pattern)) {
+			return configTime[pattern]();
 		}
 	}).join(":");
 
-	let fullDate = resDate + " " + resTime;
+	const fullDate = newDate + " " + newTime;
 	return fullDate;
 }
-
-let someDate = new Date;
-let dateFormat = someDate.getCustomFormat("YY-MMMM-DD HH:mm:ss");
-console.log(dateFormat);
+let currDate = new Date();
+console.log(currDate.getCustomFormat("YY-MMMM-DD HH:mm:ss"));
