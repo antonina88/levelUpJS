@@ -6,9 +6,8 @@ let lastname = document.createElement("p");
 let age = document.createElement("p");
 
 links.forEach(function(link) {
-	link.addEventListener("click", onLinkClicked);
+     link.addEventListener("click", onLinkClicked);
 });
-
 function onLinkClicked(ev){
 	ev.preventDefault();
 	const href = this.href; 
@@ -30,7 +29,6 @@ function onLinkClicked(ev){
 	document.body.appendChild(lastname);
 	document.body.appendChild(age);
 }
-
 window.addEventListener("popstate", function (ev) {
 	let p = Array.from(document.querySelectorAll("p"));
 	name.textContent = `Name: ${ev.state.user.name}`;
@@ -42,16 +40,14 @@ window.addEventListener("popstate", function (ev) {
 	history.appendChild(lastname);
 	history.appendChild(age);
 });
-
 window.addEventListener("hashchange", function(ev) {
 	ev.preventDefault();
 	const hash = location.hash.slice(1);
 	const currHref = location.href; 
 	const property = hash.split("=")[0];
 	const newValue = hash.split("=")[1];
-	
 	let data, 
-		user = {};
+	    user = {};
 	while ((data = reg.exec(currHref)) !== null) {
 		user = {
 			name: data[1],
@@ -67,7 +63,6 @@ window.addEventListener("hashchange", function(ev) {
 	if (user[prop] !== newValue) {
 		user[prop] = newValue;
 	}
-	
 	name.textContent = `Name: ${user.name}`;
 	lastname.textContent = `Last Name: ${user.lastname}`;
 	age.textContent = `Age: ${user.age}`;
