@@ -29,7 +29,9 @@
 			let numbsMonth = newDate.getMonth();
 			let $minTemperature = Math.round(dayElem.apparentTemperatureMin);
 			let $maxTemperature = Math.round(dayElem.apparentTemperatureMax);	
-
+			let wind = Math.round(dayElem.windGust*0.514);
+			let $weatherIcon = $(".daily-item:last-child > .icon-weather");
+	
 			$dailyContainer.append(`<div class="daily-item">
 		        <p class="day-link">${$daysArr[numbsDay]}</p>
 		       	<div class="date-container">
@@ -42,15 +44,14 @@
 					<div class="max">max ${$maxTemperature}</div>
 				</div>
 		    </div>`);
-			let wind = Math.round(dayElem.windGust*0.514);
+
 			$main.append(`<div class="weather-description">
 				<p class="weather-summary">${dayElem.summary}</p>
 				<p class="min">Minimal temperature ${$minTemperature}&deg;F</p>
 				<p class="max">Maximal temperature  ${$maxTemperature}&deg;F</p>
 				<p class="wind">wind ${wind} m/s</p>
 			</div>`);	
-		    let $weatherIcon = $(".daily-item:last-child > .icon-weather");
-
+		   
 		    switch(dayElem.icon){
 		    	case "clear-day": $weatherIcon.css({'background-position': `1px 0`}); break;
 				case "clear-night": $weatherIcon.css({'background-position': `0 -107px`}); break;
