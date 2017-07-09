@@ -1,12 +1,12 @@
 {
-  "name": "19.06",
+  "name": "JS_1906_chat",
   "version": "1.0.0",
   "description": "",
-  "main": "js/main.js",
+  "main": "index.js",
   "dependencies": {
     "http-server": "^0.10.0"
   },
-  "scripts": {
+   "scripts": {
     "start": "http-server -c-1"
   },
   "keywords": [],
