@@ -20,8 +20,7 @@ class App extends Component {
         giftsList: [],
 
         user : "",
-        textMessage : "",
-        images: []
+        textMessage : ""
       };
 
       this.addNewMessage = this.addNewMessage.bind(this);
@@ -52,63 +51,48 @@ class App extends Component {
 
   formSubmit(ev) {
     ev.preventDefault();
-
-    const { user, textMessage, images } = this.state;
-    let activeImg = document.querySelectorAll("img.active");
-
-    let idSelectedImages = [],
-        urlSelectedImages = [],
-        url;
-   // let id= ++idCount;
+    const { user, textMessage } = this.state;
+    let activeImg = Array.from(document.querySelectorAll("img.active"));
 
    if (user) {
-  /*    if (textMessage) {
-        socket.emit("chat message", {id, user, textMessage, urlSelectedImages }); 
-      }  */
       if (activeImg) {
-        /* idSelectedImages = activeImg.map(function(imgElem) {
-            imageId = imgElem.dataset.id;
+        let idSelectedImages = activeImg.map(function(imgElem) {
+            let imageId = imgElem.dataset.id;
             imgElem.classList.remove("active");
             return imageId;
-        }); */
+        }); 
 
-        activeImg.forEach(imgElem => {
-          idSelectedImages.push(imgElem.dataset.id);
-          imgElem.classList.remove("active");
+        let urlSelectedImages = idSelectedImages.map(imageId => {
+          return fetch(`http://api.giphy.com/v1/gifs/${imageId}?api_key=dc6zaTOxFJmzC`)
+                 .then(res => res.json());
         });
 
-        idSelectedImages.forEach(imageId => {
-         fetch(`http://api.giphy.com/v1/gifs/${imageId}?api_key=dc6zaTOxFJmzC`)
-          .then(res => res.json())
-          .then(res => {
-              url = res.data.images.fixed_width.url;
-              urlSelectedImages.push(url);
-            //  socket.emit("chat message", {user, url}); 
-          });
-       });
-        console.log(urlSelectedImages);
-        this.setState({images: urlSelectedImages});
-        socket.emit("chat message", {user, textMessage, images}); 
+        Promise.all(urlSelectedImages).then(function(requestUrl) {
+            let urlImages = requestUrl.map(element => {
+                return element.data.images.fixed_width.url;
+            });
+           // console.log(urlImages);
+            socket.emit("chat message", {user, textMessage, urlImages}); 
+        });  
       } 
     }
   }
 
-  addNewMessage({ id, user, textMessage, images}) {
+  addNewMessage({ user, textMessage, urlImages}) {
     const { messages } = this.state;
 
     if (user){
-        messages.push({id, user, textMessage, urlSelectedImages: images });
+        messages.push({id: ++idCount, user, textMessage, urlSelectedImages: urlImages});
     }
 
     this.setState({ 
-      messages
+      messages,
     });
   
   /* this.setState({
       messages, 
       user: "", 
-      textMessage: "", 
-      images: []
+      textMessage: ""
     }); */
 
 /*    let userElement = document.getElementById("username");
