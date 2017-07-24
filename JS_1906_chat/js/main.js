@@ -47,7 +47,7 @@ function addNewMessage({message, username, imageId, type}){
 	if (username) {
 		const div = document.createElement('div');
 		const p2 = document.createElement("p");
-		div.classList.add("message-container");
+		div.classList.add("v");
 		p2.classList.add("user-name");
 		p2.textContent = username;	
 
