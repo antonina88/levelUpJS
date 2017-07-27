@@ -4,7 +4,9 @@ export default function AddMessage({
 	updateUser,
 	updateText,
 	addNewMessage,
-	formSubmit
+	formSubmit,
+	user,
+	textMessage
 }) 
 {
 	return (
@@ -14,12 +16,14 @@ export default function AddMessage({
 	            id="username" 
 	            placeholder="Введите имя"
 	            onChange = {updateUser}
+	            value = {user}
 	        />
 	        <br />	
 	        <textarea 
 	            id="message" 
 	           	placeholder="Введите сообщение" 
 	           	onChange = {updateText}
+	           	value = {textMessage}
 	        >
 	        </textarea>
 	        <button onClick={addNewMessage}>Send</button>

@@ -71,9 +71,11 @@ class App extends Component {
             let urlImages = requestUrl.map(element => {
                 return element.data.images.fixed_width.url;
             });
-           // console.log(urlImages);
             socket.emit("chat message", {user, textMessage, urlImages}); 
+            
         });  
+        this.setState({user : ""});
+        this.setState({textMessage : ""});
       } 
     }
   }
@@ -86,19 +88,8 @@ class App extends Component {
     }
 
     this.setState({ 
-      messages,
+      messages
     });
-  
-  /* this.setState({
-      messages, 
-      user: "", 
-      textMessage: ""
-    }); */
-
-/*    let userElement = document.getElementById("username");
-    userElement.value="";
-    let messageElement = document.getElementById("message");
-    messageElement.value="";*/
   }
 
   toggleActive(ev) {
@@ -139,6 +130,9 @@ class App extends Component {
             formSubmit = {this.formSubmit}
             updateUser = {this.updateUser}
             updateText = {this.updateText}
+
+            user = {this.state.user}
+            textMessage = {this.state.textMessage}
           />
         </div>
       );
